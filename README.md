@@ -1,2 +1,0 @@
-# ProjetosGit
-Projetos para desenvolvimentos
