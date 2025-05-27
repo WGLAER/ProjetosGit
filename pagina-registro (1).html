@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar - MentalCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #4cc9f0;
+            --text-color: #333;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --font-primary: 'Poppins', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f5f7fb;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem 2rem;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .register-header h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .register-header p {
+            color: #666;
+        }
+
+        .register-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: var(--font-primary);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .register-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .register-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .login-divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .login-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #ddd;
+            z-index: 1;
+        }
+
+        .login-divider span {
+            display: inline-block;
+            background-color: white;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+            color: #666;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .social-btn:hover {
+            background-color: #f8f9fa;
+            border-color: #ccc;
+        }
+
+        .social-btn i {
+            margin-right: 10px;
+        }
+
+        .google-btn {
+            color: #ea4335;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .login-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 5px;
+            background-color: white;
+            color: var(--text-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            z-index: 1100;
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.error {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .toast i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .toast.error i {
+            color: var(--danger-color);
+        }
+
+        .toast.success i {
+            color: var(--success-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                padding: 1rem 3%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="/api/placeholder/80/80" alt="MentalCare Logo">
+                <span class="logo-text">MentalCare</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="questionario.html">Questionário</a></li>
+                <li><a href="index.html#sobre">Sobre Nós</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+            </ul>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="register-container">
+            <div class="register-header">
+                <h2>Criar Conta</h2>
+                <p>Preencha o formulário abaixo para criar sua conta</p>
+            </div>
+            
+            <form class="register-form" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Nome</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="Seu nome" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Sobrenome</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="Seu sobrenome" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Seu email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Seu telefone">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" class="form-control" placeholder="Sua senha" required>
+                        <div class="form-text">A senha deve ter pelo menos 6 caracteres</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirme sua senha" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="profession">Profissão</label>
+                        <input type="text" id="profession" class="form-control" placeholder="Sua profissão" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sector">Setor</label>
+                        <input type="text" id="sector" class="form-control" placeholder="Seu setor" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Empresa</label>
+                    <input type="text" id="company" class="form-control" placeholder="Nome da empresa" required>
+                </div>
+                
+                <button type="submit" class="register-btn">Registrar</button>
+            </form>
+            
+            <div class="login-divider">
+                <span>ou</span>
+            </div>
+            
+            <div class="social-login">
+                <button id="googleRegisterBtn" class="social-btn google-btn">
+                    <i class="fab fa-google"></i> Registrar com Google
+                </button>
+            </div>
+            
+            <div class="login-link">
+                <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-exclamation-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 MentalCare - Todos os direitos reservados</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.8.0/firebase-app.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.8.0/firebase-auth.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.8.0/firebase-firestore.min.js"></script>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "mentalcare-assessment.firebaseapp.com",
+            projectId: "mentalcare-assessment",
+            storageBucket: "mentalcare-assessment.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Show Toast Notification
+        function showToast(message, type = 'error') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const icon = toast.querySelector('i');
+            
+            toastMessage.textContent = message;
+            
+            toast.className = 'toast show';
+            if (type === 'error') {
+                toast.classList.add('error');
+                icon.className = 'fas fa-exclamation-circle';
+            } else {
+                toast.classList.add('success');
+                icon.className = 'fas fa-check-circle';
+            }
+            
+            setTimeout(() => {
+                toast.className = 'toast';
+            }, 3000);
+        }
+
+        // Form Validation
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password.length < 6) {
+                showToast('A senha deve ter pelo menos 6 caracteres.');
+                return false;
+            }
+            
+            if (password !== confirmPassword) {
+                showToast('As senhas não coincidem.');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Register Form Submission
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phone = document.getElementById('phone').value;
+            const profession = document.getElementById('profession').value;
+            const sector = document.getElementById('sector').value;
+            const company = document.getElementById('company').value;
+            
+            // Create user with email and password
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Successful registration
+                    const user = userCredential.user;
+                    
+                    // Save user data to Firestore
+                    return db.collection('users').doc(user.uid).set({
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        phone: phone,
+                        profession: profession,
+                        sector: sector,
+                        company: company,
+                        createdAt: new Date()
+                    })
+                    .then(() => {
+                        // Update profile display name
+                        return user.updateProfile({
+                            displayName: `${firstName} ${lastName}`
+                        });
+                    })
+                    .then(() => {
+                        showToast('Conta criada com sucesso!', 'success');
+                        
+                        // Redirect to dashboard after 1.5 seconds
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 1500);
+                    });
+                })
+                .catch((error) => {
+                    // Handle errors
+                    let errorMessage;
+                    
+                    switch(error.code) {
+                        case 'auth/email-already-in-use':
+                            errorMessage = 'Este email já está sendo utilizado por outra conta.';
+                            break;
+                        case 'auth/invalid-email':
+                            errorMessage = 'Email inválido. Verifique e tente novamente.';
+                            break;
+                        case 'auth/weak-password':
+                            errorMessage = 'Senha muito fraca. Utilize uma senha mais forte.';
+                            break;
+                        default:
+                            errorMessage = 'Erro ao criar conta. Tente novamente.';
+                    }
+                    
+                    showToast(errorMessage);
+                    console.error(error);
+                });
+        });
+
+        // Google Registration
+        document.getElementById('googleRegisterBtn').addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    const user = result.user;
+                    const isNewUser = result.additionalUserInfo.isNewUser;
+                    
+                    if (isNewUser) {
+                        // New user, redirect to complete profile
+                        showToast('Conta criada com sucesso! Complete seu perfil para continuar.', 'success');
+                        
+                        setTimeout(() => {
+                            window.location.href = 'complete-profile.html';
+                        }, 1500);
+                    } else {
+                        // Existing user, redirect to dashboard
+                        showToast('Login realizado com sucesso!', 'success');
+                        
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 1000);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Google sign in error: ", error);
+                    showToast('Erro ao registrar com Google. Tente novamente.');
+                });
+        });
+
+        // Check Auth State
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in, check if they're on the register page
+                const currentPath = window.location.pathname;
+                if (currentPath.includes('register.html')) {
+                    // Check if the user has a complete profile
+                    db.collection('users').doc(user.uid).get()
+                        .then((doc) => {
+                            if (doc.exists && doc.data().profession) {
+                                // User has a complete profile, redirect to dashboard
+                                window.location.href = 'dashboard.html';
+                            } else if (!currentPath.includes('complete-profile.html')) {
+                                // User needs to complete their profile
+                                window.location.href = 'complete-profile.html';
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error checking user profile: ", error);
+                        });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
