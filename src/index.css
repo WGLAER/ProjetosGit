@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 60% 98%; /* Light Sky Blue */
+    --foreground: 220 15% 25%; /* Dark Slate Gray */
+
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 220 15% 25%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 25%;
+
+    --primary: 180 50% 45%; /* Soft Teal */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 150 40% 90%; /* Pale Mint Green */
+    --secondary-foreground: 180 50% 30%; /* Darker Teal */
+
+    --muted: 210 40% 95%; /* Very Light Blue */
+    --muted-foreground: 210 20% 45%; /* Muted Slate Blue */
+
+    --accent: 160 60% 85%; /* Light Aqua */
+    --accent-foreground: 160 50% 30%; /* Darker Aqua */
+
+    --destructive: 0 70% 60%; /* Soft Red */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 30% 88%; /* Light Grayish Blue */
+    --input: 210 30% 92%; /* Very Light Grayish Blue for inputs */
+    --ring: 180 50% 55%; /* Teal for focus rings */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 25% 10%; /* Dark Navy Blue */
+    --foreground: 210 40% 90%; /* Light Grayish Blue */
+
+    --card: 220 25% 15%; /* Darker Navy Blue */
+    --card-foreground: 210 40% 90%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 210 40% 90%;
+
+    --primary: 180 50% 55%; /* Brighter Teal for dark mode */
+    --primary-foreground: 220 25% 5%; /* Very Dark Blue */
+
+    --secondary: 220 20% 25%; /* Dark Slate */
+    --secondary-foreground: 210 40% 90%;
+
+    --muted: 220 20% 20%; /* Darker Slate */
+    --muted-foreground: 210 30% 70%; /* Lighter Muted Blue */
+
+    --accent: 160 50% 45%; /* Darker Aqua for dark mode */
+    --accent-foreground: 210 40% 95%; /* Very Light Blue */
+
+    --destructive: 0 60% 50%; /* Muted Red for dark mode */
+    --destructive-foreground: 210 40% 95%;
+
+    --border: 220 20% 30%; /* Darker Border */
+    --input: 220 20% 25%; /* Darker Input */
+    --ring: 180 50% 65%; /* Brighter Teal Ring */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom gradient background for body - lighter and softer */
+body {
+  background: linear-gradient(135deg, hsl(180 50% 85%) 0%, hsl(210 60% 90%) 100%); /* Light Teal to Soft Blue */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
